@@ -9,7 +9,7 @@
     "clean": "node -e 'fs.rmSync(`dist`, {recursive: true, force: true})'",
     "test": "vitest --dir src --coverage",
     "lint": "eslint --ext .ts src",
-    "check": "tsc --noEmit && npm run lint && npm run test",
+    "check": "tsc --noEmit && npm run lint && npm run test -- --run",
     "prepare": "husky install"
   },
   "devDependencies": {

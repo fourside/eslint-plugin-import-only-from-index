@@ -1,7 +1,7 @@
 {
   "name": "eslint-plugin-import-only-from-index",
   "version": "1.0.0",
-  "description": "",
+  "description": "Eslint plugin to enforce import only from index file",
   "main": "lib/index.js",
   "scripts": {
     "build": "tsc",
@@ -29,8 +29,16 @@
     "vitest": "^0.7.7"
   },
   "keywords": [],
-  "author": "",
+  "author": "fourside@gmail.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fourside/eslint-plugin-import-only-from-index"
+  },
   "license": "MIT",
+  "files": [
+    "lib",
+    "!lib/*.test.js"
+  ],
   "prettier": {
     "singleQuote": false,
     "printWidth": 120,

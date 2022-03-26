@@ -1,4 +1,4 @@
-import { importOnlyFromIndex } from "./import-only-from-index";
+import { importOnlyFromIndex } from "./eslint-rule";
 
 export = {
   rules: {

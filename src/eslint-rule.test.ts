@@ -2,7 +2,7 @@ import { test, describe, beforeAll, afterAll } from "vitest";
 import { RuleTester } from "eslint";
 import fs from "fs";
 import path from "path";
-import { importOnlyFromIndex } from "./import-only-from-index";
+import { importOnlyFromIndex } from "./eslint-rule";
 
 const tester = new RuleTester({
   parserOptions: { ecmaVersion: 2019, sourceType: "module" },
@@ -43,6 +43,12 @@ describe("import-only-from-index", () => {
           options: [["fixtures/components"]],
           filename: path.join(__dirname, "../fixtures/components/button/button.tsx"),
           code: `import { primary } from "./button.css";`,
+        },
+        {
+          name: "ライブラリのimport",
+          options: [["fixtures/components"]],
+          filename: path.join(__dirname, "../fixtures/lib/client.ts"),
+          code: `import { fetch } from "node-fetch";`,
         },
       ],
       invalid: [

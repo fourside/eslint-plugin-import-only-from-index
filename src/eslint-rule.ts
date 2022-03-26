@@ -1,5 +1,6 @@
 import { Rule } from "eslint";
 import { Node, ImportDeclaration } from "estree";
+import fs from "fs";
 import path from "path";
 import { isRestrictedSource } from "./is-restricted-source";
 
@@ -21,16 +22,28 @@ export const importOnlyFromIndex: Rule.RuleModule = {
     return {
       ImportDeclaration: async (node: Node) => {
         const { source } = node as ImportDeclaration;
-        if (source.value === undefined || source.value === null) {
+        const sourceValue = source.value?.toString();
+        if (sourceValue === undefined) {
           return;
         }
-        if (isRestrictedSource(editingFileName, source.value.toString(), restrictedPath)) {
-          context.report({
-            node,
-            message: `cannot import except index under '${option}'`,
-          });
+        const sourceFileName = sourceValue.startsWith(".")
+          ? path.resolve(path.dirname(editingFileName), sourceValue)
+          : sourceValue;
+
+        for (const ext of HIDDEN_EXTENSIONS) {
+          const sourceFileWithExtension = `${sourceFileName}${ext}`;
+          if (fs.existsSync(sourceFileWithExtension)) {
+            if (isRestrictedSource(editingFileName, sourceFileWithExtension, restrictedPath)) {
+              context.report({
+                node,
+                message: `cannot import except index under '${option}'`,
+              });
+            }
+          }
         }
       },
     };
   },
 };
+
+const HIDDEN_EXTENSIONS = [".ts", ".tsx", ".css"];

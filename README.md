@@ -14,6 +14,18 @@
 }
 ```
 
+tsconfig.json
+```
+"compilerOptions": {
+  "plugins": [
+    {
+      "name": "eslint-plugin-import-only-from-index",
+      "restrictedPath": "src/components"
+    }
+  ]
+}
+```
+
 ## License
 
 MIT

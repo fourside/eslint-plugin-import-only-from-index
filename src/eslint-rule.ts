@@ -1,5 +1,5 @@
 import { Rule } from "eslint";
-import { Node, ImportDeclaration } from "estree";
+import type { Node, ImportDeclaration } from "estree";
 import fs from "fs";
 import path from "path";
 import { isRestrictedSource } from "./is-restricted-source";
